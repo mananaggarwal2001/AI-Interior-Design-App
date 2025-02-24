@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.12.0",
     "@radix-ui/react-slot": "^1.1.2",
     "ai_interior_design_app": "file:",
+    "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.475.0",
@@ -22,6 +24,8 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@types/node": "22.13.5",
+    "@types/react": "19.0.10",
     "eslint": "^8",
     "eslint-config-next": "14.2.15",
     "postcss": "^8",

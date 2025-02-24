@@ -1,6 +1,8 @@
 
-import {Poppins} from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import "./globals.css";
+import { ClerkProvider } from '@clerk/nextjs';
+import Provider from './provider.js'
 
 export const metadata = {
   title: "Create Next App",
@@ -8,17 +10,21 @@ export const metadata = {
 };
 const poppins = Poppins({
   subsets: ['latin'],
-  weight:['100', '200', '300', '400']
+  weight: ['100', '200', '300', '400']
 })
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={poppins.className}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={poppins.className}
+        >
+          <Provider>
+            {children}
+          </Provider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
