@@ -1,10 +1,10 @@
 import { UserButton } from '@clerk/nextjs'
 import React from 'react'
-
+import Listing from './_components/Listing.js'
 const Page = () => {
     return (
         <div>
-            this is the new dashboard and this is activated when the user logged in in the application.<UserButton/>
+            <Listing />
         </div>
     )
 }

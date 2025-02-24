@@ -12,7 +12,11 @@ const Provider = ({ children }) => {
 
     const verifyUser = async () => {
         const value = await axios.post(`${process.env.NEXT_PUBLIC_HOST}/api/verify-user`, { user: user })
-        setUserDetails(value.data.result)
+        if(value){
+            setUserDetails(value.data.result)
+        }else{
+            setUserDetails({});
+        }
     }
     return (
         <UserDetailsContext.Provider value={{ userdetails, setUserDetails }}>
