@@ -3,13 +3,13 @@ import { UserButton } from '@clerk/nextjs'
 import Image from 'next/image'
 import React, { useContext } from 'react'
 import { UserDetailsContext } from '../../_context/UserDetailsContext'
-import { Button } from '../../../components/ui/button'
+import {Button} from '../../../components/ui/button.jsx'
 function Header() {
     const {userdetails, setUserDetails}= useContext(UserDetailsContext)
     return (
         <div className='px-5 py-3 shadow-sm flex justify-between items-center'>
             <div className='flex gap-2 items-center'>
-                <Image src={'./logo.svg'} alt='AI Interior Design' width={40} height={40} />
+                <Image src={'/logo.svg'} alt='AI Interior Design' width={40} height={40} />
                 <h2 className='font-bold text-lg'>AI Interior Design</h2>
             </div>
             <Button className='border-2 border-primary rounded-full text-primary font-bold' variant='ghost'>Buy More Credits</Button>

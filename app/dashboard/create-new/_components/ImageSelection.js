@@ -10,7 +10,7 @@ const ImageSelection = ({selectedImage}) => {
     return (
         <div>
             <label>Select Image of Your Room</label>
-            <div className='mt-3'>
+            <div className='mt-1'>
                 <label htmlFor="upload-image">
                     <div className={`p-16 border border-primary bg-slate-200 border-dotted rounded-xl flex justify-center cursor-pointer hover:shadow-lg ${file && 'p-0 bg-white object-cover'}`}>
                         {!file ? <Image height={150} width={150} alt='Image Upload In the Screen' src={'/imageupload.png'}></Image>
