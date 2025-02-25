@@ -1,7 +1,7 @@
 "use client"
 import Image from 'next/image'
 import React, { useState } from 'react'
-function DesignType() {
+function DesignType({selectedDesginType}) {
   const roomtypes = [
     { name: 'Guest Room', image: '/guestroom.jpg' },
     { name: 'Living Room', image: '/livingroom.png' },
@@ -17,8 +17,11 @@ function DesignType() {
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 mt-3'>
         {roomtypes.map((element, index) => {
           return (
-            <div key={index} className={`shadow-md rounded-md w-full`} onClick={() => setselectedImageOption(element.name)}>
-              <Image src={element.image} alt='Room Design Image' width={200} height={100} className={`h-[80px] rounded-md hover:scale-105 transition-all duration-100 cursor-pointer ${element.name===selectedImageOption && 'border-2 border-black rounded-md p-1'}`}></Image>
+            <div key={index} className={`shadow-md rounded-md w-fit h-fit`} onClick={() => {
+              setselectedImageOption(element.name)
+              selectedDesginType(element.name)
+            }}>
+              <Image src={element.image} alt='Room Design Image' width={200} height={100} className={` h-[80px] rounded-md hover:scale-105 transition-all duration-100 cursor-pointer ${element.name === selectedImageOption && 'border-2 border-black rounded-md p-1'}`}></Image>
               <h2 className='text-xs font-semibold text-center'>{element.name}</h2>
             </div>
           )
