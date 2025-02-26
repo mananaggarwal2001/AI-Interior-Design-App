@@ -5,4 +5,5 @@ const userSchema = mongoose.Schema({
     imageUrl: { type: String, required: true },
     credits: { type: Number, default: 3 }
 })
+console.log(mongoose.models)
 export default mongoose.models.User || mongoose.model('User', userSchema)

@@ -1,28 +1,32 @@
 import { storage } from '../../../config/firebaseConfig.js'
 import axios from "axios"
 import { ref, uploadString, getDownloadURL } from "firebase/storage"
+import { connectdb } from '../../../databaseconnect/db.js'
 import { NextResponse } from "next/server"
+import Image from '@/app/models/Image.js'
 import Replicate from "replicate"
 const replicate = new Replicate({ auth: process.env.REPLICATE_API_TOKEN })
 export async function POST(request) {
-
-    const { imageUrl, roomType, designType, additionalInformation } = await request.json()
-    console.log(request.json())
+    const { imageUrl, roomType, designType, additionalInformation, emailAddress } = await request.json()
+    console.log("The email address of this person is :- ", emailAddress)
     try {
+        await connectdb()
         const input = {
             image: imageUrl,
             prompt: `A ${roomType} with a ${designType} style interior ${additionalInformation}`
         };
-        const output = await replicate.run("adirik/interior-design:76604baddc85b1b4616e1c6475eca080da339c8875bd4996705440484a6eac38", { input });
+        // const output = await replicate.run("adirik/interior-design:76604baddc85b1b4616e1c6475eca080da339c8875bd4996705440484a6eac38", { input });
+        // console.log(output)
+        const output= 'https://replicate.delivery/xezq/eY7VySREalQHdizIUxK7CwnXbae8OgkkPl4j4TaWn5xgBOTUA/out.png'
         const base64Image = await convertImageToBase64(output) // this will give the converted base 64 image URL for doing the work.
         const fileName = Date.now() + '.png'
         const storageRef = ref(storage, 'room-redesign/' + fileName)
         await uploadString(storageRef, base64Image, 'data_url')
         const downloadUrl = await getDownloadURL(storageRef)
-        console.log(downloadUrl)
-        return NextResponse.json({ result: downloadUrl })
-        // last step is remaining to save everything to database.
-
+        // last step is remaining to save everything to database which is done by the user for generating image.
+        const image = await Image.create({ roomType: roomType, designType: designType, originalImage: imageUrl, aiImage: downloadUrl, userEmail: emailAddress })
+        const finalresult = await image.save()
+        return NextResponse.json({ result: finalresult })
     } catch (error) {
         return NextResponse.error({ error })
     }

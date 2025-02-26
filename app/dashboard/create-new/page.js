@@ -8,21 +8,24 @@ import { Button } from '../../../components/ui/button.jsx'
 import axios from 'axios'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { storage } from '../../../config/firebaseConfig.js'
+import { useUser } from '@clerk/nextjs'
 const CreateNew = () => {
     const [formData, setFormData] = useState()
+    const { user } = useUser()
     const onHandleInputChange = (event, name) => {
         setFormData(prev => ({ ...prev, [name]: event }))
         console.log(formData)
     }
     const generateAIImage = async () => {
         const rawImageURL = await saveRawImageToFireBase()
-        const finalvalue = await axios.post("/api/redesign-room", {
+        await axios.post("/api/redesign-room", {
             imageUrl: rawImageURL,
             roomType: formData?.roomType,
             designType: formData?.designType,
-            additionalInformation: formData?.additionalInformation
+            additionalInformation: formData?.additionalInformation,
+            emailAddress: user?.primaryEmailAddress?.emailAddress
         })
-        console.log(finalvalue)
+
     }
     const saveRawImageToFireBase = async () => {
         const fileName = Date.now() + "_raw.png"
