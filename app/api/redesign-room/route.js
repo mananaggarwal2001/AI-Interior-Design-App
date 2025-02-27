@@ -17,16 +17,18 @@ export async function POST(request) {
         };
         // const output = await replicate.run("adirik/interior-design:76604baddc85b1b4616e1c6475eca080da339c8875bd4996705440484a6eac38", { input });
         // console.log(output)
-        const output= 'https://replicate.delivery/xezq/eY7VySREalQHdizIUxK7CwnXbae8OgkkPl4j4TaWn5xgBOTUA/out.png'
+        const output= 'https://replicate.delivery/xezq/AQ4PyyTFKbKGI1lPTX2BBPt6sHfXeGvLj4fEQFbcKJzyRxmoA/out.png'
         const base64Image = await convertImageToBase64(output) // this will give the converted base 64 image URL for doing the work.
         const fileName = Date.now() + '.png'
         const storageRef = ref(storage, 'room-redesign/' + fileName)
         await uploadString(storageRef, base64Image, 'data_url')
         const downloadUrl = await getDownloadURL(storageRef)
         // last step is remaining to save everything to database which is done by the user for generating image.
+        console.log(downloadUrl)
         const image = await Image.create({ roomType: roomType, designType: designType, originalImage: imageUrl, aiImage: downloadUrl, userEmail: emailAddress })
         const finalresult = await image.save()
-        return NextResponse.json({ result: finalresult })
+        // console.log("finalresult is:- ", finalresult)
+        return NextResponse.json({ result: finalresult.aiImage })
     } catch (error) {
         return NextResponse.error({ error })
     }

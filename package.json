@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.12.0",
+    "@radix-ui/react-alert-dialog": "^1.1.6",
     "@radix-ui/react-select": "^2.1.6",
     "@radix-ui/react-slot": "^1.1.2",
     "ai_interior_design_app": "file:",
@@ -21,6 +22,7 @@
     "mongoose": "^8.10.1",
     "next": "14.2.15",
     "react": "^18",
+    "react-before-after-slider-component": "^1.1.8",
     "react-dom": "^18",
     "replicate": "^0.33.0",
     "tailwind-merge": "^3.0.2",

@@ -7,7 +7,6 @@ export async function POST(request) {
     try {
         await connectdb()
         const findedresult = await User.findOne({ email: user.primaryEmailAddress.emailAddress })
-        console.log(user)
         if (!findedresult) {
             const newUser = await User.create({ name: user.username, email: user.primaryEmailAddress.emailAddress, imageUrl: user.imageUrl })
             const result = await newUser.save()

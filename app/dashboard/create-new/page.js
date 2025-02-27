@@ -9,22 +9,40 @@ import axios from 'axios'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { storage } from '../../../config/firebaseConfig.js'
 import { useUser } from '@clerk/nextjs'
+import LoadingImage from './_components/LoadingImage.js'
+import AiOutputDialog from './_components/AiOutputDialog.js'
 const CreateNew = () => {
     const [formData, setFormData] = useState()
+    const [loader, setLoader] = useState(false)
     const { user } = useUser()
+    const [aiOutputDialog, setAiOutputdialog] = useState(false)
+    const [originalImage, setOriginalImage]= useState('')
+    const [AiImage, setAiImage]= useState('')
     const onHandleInputChange = (event, name) => {
         setFormData(prev => ({ ...prev, [name]: event }))
         console.log(formData)
     }
     const generateAIImage = async () => {
-        const rawImageURL = await saveRawImageToFireBase()
-        await axios.post("/api/redesign-room", {
-            imageUrl: rawImageURL,
-            roomType: formData?.roomType,
-            designType: formData?.designType,
-            additionalInformation: formData?.additionalInformation,
-            emailAddress: user?.primaryEmailAddress?.emailAddress
-        })
+        try {
+
+            setLoader(true)
+            const rawImageURL = await saveRawImageToFireBase()
+            const response = await axios.post("/api/redesign-room", {
+                imageUrl: rawImageURL,
+                roomType: formData?.roomType,
+                designType: formData?.designType,
+                additionalInformation: formData?.additionalInformation,
+                emailAddress: user?.primaryEmailAddress?.emailAddress
+            })
+            console.log(response.data)
+            setLoader(false)
+            setOriginalImage(rawImageURL)
+            setAiImage(response.data.result)
+            setAiOutputdialog(true)
+        } catch (error) {
+            console.log(error)
+            setLoader(false)
+        }
 
     }
     const saveRawImageToFireBase = async () => {
@@ -56,6 +74,8 @@ const CreateNew = () => {
                     {/* Button to generate image through the AI model. */}
                     <Button onClick={generateAIImage} className='mt-4 mb-1 bg-primary w-full'>Generate</Button>
                     <p className='mb-40 text-xs font-semibold text-gray-400'>NOTE: 1 Credit Will Be Used To Redesign Your Room</p>
+                    <LoadingImage loading={loader} />
+                    <AiOutputDialog openDialog={aiOutputDialog} closeDialog={() => setAiOutputdialog(false)} originalImage= {originalImage} AiImage={AiImage} />
                 </div>
             </div>
         </div>
