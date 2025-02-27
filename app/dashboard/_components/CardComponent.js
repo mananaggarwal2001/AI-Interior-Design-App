@@ -48,8 +48,8 @@ function CardComponent({ creditsnumber }) {
             <Card className='text-center'>
                 <CardHeader>
                     <CardTitle className='text-3xl text-center font-bold'>{creditsnumber}</CardTitle>
-                    <CardDescription>Credits</CardDescription>
-                    <Button onClick={() => handleCreditstransaction(creditsnumber * 3)} className='w-full font-semibold'>Select</Button>
+                    <CardDescription className='font-semibold text-lg'>Credits</CardDescription>
+                    <Button onClick={() => handleCreditstransaction(creditsnumber * 3)} className='w-full text-lg font-semibold'>Select</Button>
                     <p className="font-semibold text-lg">₹{creditsnumber * 3}</p>
                 </CardHeader>
             </Card>

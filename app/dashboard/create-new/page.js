@@ -1,7 +1,9 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { UserDetailsContext } from '@/app/_context/UserDetailsContext.js'
 import ImageSelection from './_components/ImageSelection.js'
 import RoomType from './_components/RoomType.js'
+import { useRouter } from 'next/navigation.js'
 import DesignType from './_components/DesignType.js'
 import AdditionalRequirement from './_components/AdditionalRequirement.js'
 import { Button } from '../../../components/ui/button.jsx'
@@ -16,34 +18,41 @@ const CreateNew = () => {
     const [loader, setLoader] = useState(false)
     const { user } = useUser()
     const [aiOutputDialog, setAiOutputdialog] = useState(false)
-    const [originalImage, setOriginalImage]= useState('')
-    const [AiImage, setAiImage]= useState('')
+    const [originalImage, setOriginalImage] = useState('')
+    const [AiImage, setAiImage] = useState('')
+    const router = useRouter()
+    const { credits, setCredits } = useContext(UserDetailsContext)
     const onHandleInputChange = (event, name) => {
         setFormData(prev => ({ ...prev, [name]: event }))
         console.log(formData)
     }
     const generateAIImage = async () => {
-        try {
-
-            setLoader(true)
-            const rawImageURL = await saveRawImageToFireBase()
-            const response = await axios.post("/api/redesign-room", {
-                imageUrl: rawImageURL,
-                roomType: formData?.roomType,
-                designType: formData?.designType,
-                additionalInformation: formData?.additionalInformation,
-                emailAddress: user?.primaryEmailAddress?.emailAddress
-            })
-            console.log(response.data)
-            setLoader(false)
-            setOriginalImage(rawImageURL)
-            setAiImage(response.data.result)
-            setAiOutputdialog(true)
-        } catch (error) {
-            console.log(error)
-            setLoader(false)
+        if (credits === 0) {
+            return router.push(`${process.env.NEXT_PUBLIC_HOST}/buymorecredits`)
+        } else {
+            try {
+                setLoader(true)
+                const rawImageURL = await saveRawImageToFireBase()
+                const response = await axios.post("/api/redesign-room", {
+                    imageUrl: rawImageURL,
+                    roomType: formData?.roomType,
+                    designType: formData?.designType,
+                    additionalInformation: formData?.additionalInformation,
+                    emailAddress: user?.primaryEmailAddress?.emailAddress
+                })
+                console.log("The  response is:- ", response)
+                if (response.data.success) {
+                    setCredits(credits - 1);
+                }
+                setLoader(false)
+                setOriginalImage(rawImageURL)
+                setAiImage(response.data.result)
+                setAiOutputdialog(true)
+            } catch (error) {
+                console.log(error)
+                setLoader(false)
+            }
         }
-
     }
     const saveRawImageToFireBase = async () => {
         const fileName = Date.now() + "_raw.png"
@@ -72,10 +81,10 @@ const CreateNew = () => {
                     {/* Additional information. */}
                     <AdditionalRequirement addtionalInformation={(value) => onHandleInputChange(value, 'additionalInformation')} />
                     {/* Button to generate image through the AI model. */}
-                    <Button onClick={generateAIImage} className='mt-4 mb-1 bg-primary w-full'>Generate</Button>
+                    <Button disabled={credits === 0} onClick={generateAIImage} className='mt-4 mb-1 bg-primary w-full'>Generate</Button>
                     <p className='mb-40 text-xs font-semibold text-gray-400'>NOTE: 1 Credit Will Be Used To Redesign Your Room</p>
                     <LoadingImage loading={loader} />
-                    <AiOutputDialog openDialog={aiOutputDialog} closeDialog={() => setAiOutputdialog(false)} originalImage= {originalImage} AiImage={AiImage} />
+                    <AiOutputDialog openDialog={aiOutputDialog} closeDialog={() => setAiOutputdialog(false)} originalImage={originalImage} AiImage={AiImage} />
                 </div>
             </div>
         </div>
