@@ -23,7 +23,7 @@ function RoomDesignCard({ room }) {
                 <h2 className='font-semibold text-sm'>✌️Room Type: {room.roomType}</h2>
                 <h2 className='font-semibold text-sm'>✌️Design Type: {room.designType}</h2>
             </div>
-            <AiOutputDialog originalImage={room.originalImage} AiImage={room.aiImage} openDialog={openDialog} closeDialog={() => setOpenDialog(false)} />
+            <AiOutputDialog originalImage={room.originalImage} AiImage={room.aiImage} openDialog={openDialog} closeDialog={setOpenDialog} />
         </div>
     )
 }

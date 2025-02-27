@@ -22,7 +22,7 @@ const AiOutputDialog = ({ openDialog, closeDialog, originalImage, AiImage }) => 
         imageUrl: AiImage
     };
     return (
-        <AlertDialog open={openDialog}>
+        <AlertDialog open={openDialog} onOpenChange={closeDialog}>
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>Finished</AlertDialogTitle>
@@ -30,7 +30,7 @@ const AiOutputDialog = ({ openDialog, closeDialog, originalImage, AiImage }) => 
                         firstImage={FIRST_IMAGE}
                         secondImage={SECOND_IMAGE}
                     />
-                    <Button onClick={closeDialog}>Close
+                    <Button onClick={()=>closeDialog(false)}>Close
 
                     </Button>
                 </AlertDialogHeader>
