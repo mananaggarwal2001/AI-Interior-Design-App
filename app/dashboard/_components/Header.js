@@ -8,7 +8,7 @@ import Link from 'next/link'
 function Header() {
     const { credits } = useContext(UserDetailsContext)
     return (
-        <div className='px-5 py-3 shadow-sm flex justify-between items-center'>
+        <div className='px-5 py-3 shadow-sm flex md:flex-row flex-col gap-2 md:gap-0 justify-between items-center'>
             <div className='flex gap-2 items-center'>
                 <Image src={'/logo.svg'} alt='AI Interior Design' width={40} height={40} />
                 <h2 className='font-bold text-lg'>AI Interior Design</h2>

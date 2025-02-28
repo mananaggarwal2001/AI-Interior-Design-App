@@ -24,8 +24,8 @@ function Listing() {
 
     return (
         <div>
-            <div className='flex justify-between items-center'>
-                <h2 className='text-3xl font-extrabold'>Hello, {user?.fullName}</h2>
+            <div className='flex justify-between gap-5 md:gap-0 items-center'>
+                <h2 className='md:text-3xl text-lg font-extrabold'>Hello, {user?.fullName}</h2>
                 <Link href={'/dashboard/create-new'}>
                     <Button className='rounded-md font-semibold text-sm py-2 px-3'>+ Redesign Room</Button>
                 </Link>

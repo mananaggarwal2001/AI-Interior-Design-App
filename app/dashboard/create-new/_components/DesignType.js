@@ -16,7 +16,7 @@ function DesignType({selectedDesginType}) {
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-3'>
         {roomtypes.map((element, index) => {
           return (
-            <div key={index} className={`shadow-md rounded-md w-fit h-fit`} onClick={() => {
+            <div key={index} className={`shadow-md rounded-md mx-auto md:mx-0 w-fit h-fit`} onClick={() => {
               setselectedImageOption(element.name)
               selectedDesginType(element.name)
             }}>
