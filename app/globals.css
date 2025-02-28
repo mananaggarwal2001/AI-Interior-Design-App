@@ -9,8 +9,15 @@
 }
 
 .before-after-slider img {
-  height:200px !important;
+  height: 200px !important;
   max-height: 200px;
+}
+
+body {
+  background-color: #fdfafa;
+  opacity: 0.8;
+  background-image: radial-gradient(rgba(222, 222, 222, 1) 0.2px, #fdfafa 0.2px);
+  background-size: 4px 4px;
 }
 
 @layer base {
@@ -41,6 +48,7 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -75,6 +83,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

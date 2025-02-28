@@ -16,7 +16,7 @@ function Header() {
             <Link href='/dashboard/buymorecredits'>
                 <Button className='border-2 border-primary rounded-full text-primary font-bold' variant='ghost'>Buy More Credits</Button>
             </Link>
-            <div className='right flex items-center gap-5 justify-center'>
+            <div className='right flex items-center gap-2 justify-center'>
                 <div className='flex gap-2 bg-slate-200 px-3 py-1 rounded-full items-center'>
                     <Image src={'/star.png'} width={15} height={15} alt='star icon'></Image>
                     <h2 className='text-md font-semibold'>{credits}</h2>

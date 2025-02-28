@@ -81,7 +81,10 @@ const CreateNew = () => {
                     {/* Additional information. */}
                     <AdditionalRequirement addtionalInformation={(value) => onHandleInputChange(value, 'additionalInformation')} />
                     {/* Button to generate image through the AI model. */}
-                    <Button disabled={credits === 0} onClick={generateAIImage} className='mt-4 mb-1 bg-primary w-full'>Generate</Button>
+                    {credits === 0 && <Button disabled={true} onClick={generateAIImage} className='mt-4 mb-1 bg-primary w-full disabled:cursor-not-allowed disabled:opacity-50' >No Credits</Button>}
+                    {credits > 0 &&
+                        <Button  onClick={generateAIImage} className='mt-4 mb-1 bg-primary w-full' >Generate</Button>
+                    }
                     <p className='mb-40 text-xs font-semibold text-gray-400'>NOTE: 1 Credit Will Be Used To Redesign Your Room</p>
                     <LoadingImage loading={loader} />
                     <AiOutputDialog openDialog={aiOutputDialog} closeDialog={() => setAiOutputdialog(false)} originalImage={originalImage} AiImage={AiImage} />

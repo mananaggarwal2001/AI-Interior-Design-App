@@ -5,16 +5,15 @@ function DesignType({selectedDesginType}) {
   const roomtypes = [
     { name: 'Guest Room', image: '/guestroom.jpg' },
     { name: 'Living Room', image: '/livingroom.png' },
-    { name: 'Bohenam', image: '/bohenam.jpg' },
-    { name: 'Bohenam', image: '/bohenam.jpg' },
-    { name: 'Bohenam', image: '/bohenam.jpg' },
-    { name: 'Bohenam', image: '/bohenam.jpg' },
+    { name: 'Industrial', image: '/industrial.jpg' },
+    { name: 'Bathroom', image: '/bathroom.jpg' },
+    { name: 'Kitchen', image: '/kitchen.jpg' }
   ]
   const [selectedImageOption, setselectedImageOption] = useState('')
   return (
     <div className='mt-5'>
       <label htmlFor="" className='text-gray-600 font-semibold'>Select Interial Design Type</label>
-      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 mt-3'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-3'>
         {roomtypes.map((element, index) => {
           return (
             <div key={index} className={`shadow-md rounded-md w-fit h-fit`} onClick={() => {

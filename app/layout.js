@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <body
-          className={poppins.className}
+          className={`${poppins.className} bg-gray-100`}
         >
           <Provider>
             {children}

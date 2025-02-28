@@ -16,8 +16,10 @@ function RoomType({selectedRoomType}) {
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="Living Room">Living Room</SelectItem>
-          <SelectItem value="BedRoom">BedRoom</SelectItem>
+          <SelectItem value="Bed Room">Bed Room</SelectItem>
           <SelectItem value="Kitchen">Kitchen</SelectItem>
+          <SelectItem value="Industrial">Industrial</SelectItem>
+          <SelectItem value="Bathroom">Bathroom</SelectItem>
         </SelectContent>
       </Select>
     </div>
