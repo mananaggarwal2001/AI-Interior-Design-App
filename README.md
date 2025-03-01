@@ -10,11 +10,11 @@ The AI Interior Design App is a web-based application that leverages artificial 
 ## Installation
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/ai_interior_design_app.git
+    git clone https://github.com/mananaggarwal2001/AI-Interior-Design-App.git
     ```
 2. Navigate to the project directory:
     ```bash
-    cd ai_interior_design_app
+    cd AI-Interior-Design-App (press tab for auto completion)
     ```
 3. Install dependencies:
     ```bash
@@ -29,7 +29,7 @@ The AI Interior Design App is a web-based application that leverages artificial 
 2. Open your browser and navigate to `http://localhost:3000`.
 
 ## Technologies Used
-- **Frontend**: React, HTML, CSS
+- **Frontend**: React, HTML, CSS, NextJS
 - **Backend**: Node.js, Express
 - **AI**: Pre-trained models
 - **Database**: MongoDB
