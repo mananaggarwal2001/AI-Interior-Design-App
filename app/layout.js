@@ -3,6 +3,7 @@ import { Poppins } from 'next/font/google'
 import "./globals.css";
 import { ClerkProvider } from '@clerk/nextjs';
 import Provider from './provider.js'
+import Footer from './_components/Footer';
 
 export const metadata = {
   title: "Create Next App",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
           <Provider>
             {children}
           </Provider>
+          <Footer/>
         </body>
       </html>
     </ClerkProvider>

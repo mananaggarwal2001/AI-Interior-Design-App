@@ -12,7 +12,7 @@ export default function Home() {
           <h2 className="text-4xl font-bold">AI Room And Home</h2>
           <h2 className="text-4xl font-bold text-blue-800">Interior Design</h2>
           <div className="flex flex-col gap-4 items-center mt-4">
-            <p className="text-sm font-semibold text-black">Transform your space with AI room Design at your fingertips and make your lifestyle easy!!!!</p>
+            <p className="text-sm font-semibold text-black md:text-left text-center">Transform your space with AI room Design at your fingertips and make your lifestyle easy!!!!</p>
             <Link href={'/sign-in'}>
               <Button>Get Started</Button>
             </Link>

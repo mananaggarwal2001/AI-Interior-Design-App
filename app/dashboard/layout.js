@@ -1,5 +1,6 @@
 
 
+import Footer from '../_components/Footer.js'
 import Header from './_components/Header.js'
 import React from 'react'
 function Layout({ children }) {
